@@ -74,11 +74,11 @@ void loop() {
         if (was_up[y][x]) {            // [2] Check if it wasn't already pressed (suddenly pressed)
           last_up[y][x] = mill;        // Set the last time the key was up to now
           was_up[y][x] = false;        // Set the was_up value to false as it is now being pressed down
-          key_action(y, x, val);       // Run the key action associated with this key as it was just pressed down
+          key_action(y, x);            // Run the key action associated with this key as it was just pressed down
         }else if (mill - last_up[y][x] >= INITIAL_WAIT + RAPID_WAIT * rapid_amount[y][x]) {
                                        // [2] else check whether the difference between now and the last time the key was up is greater than the initial wait
                                        // time plus the rapid wait time multiplied by how many times it has been sent. This makes the program wait
-          key_action(y, x, val);       // the initial wait send the action, then send the action on the interval of the rapid wait time
+          key_action(y, x);            // the initial wait send the action, then send the action on the interval of the rapid wait time
           rapid_amount[y][x]++;        // increase the rapid amount so that we wait another rapid wait time
         }
       }
@@ -86,7 +86,7 @@ void loop() {
   }
 }
 
-int key_action(int y, int x, int val) { // TODO: Better way to do this?
+int key_action(int y, int x) { // TODO: Better way to do this?
   switch (y) {
     case 0:
       switch (x) {
